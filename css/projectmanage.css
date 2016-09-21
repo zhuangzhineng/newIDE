@@ -1,0 +1,11 @@
+.project-header{
+	border-bottom: 1px solid #d5d5d5;
+	padding-bottom: 0.5em;
+	font-size: 1em;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+.project-name{
+	font-size: 0.6em;
+	font-weight: 600;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="zzn">
+
+    <title>Database</title>
+
+    <!-- Custom styles for this template -->
+    <link href="css/database.css" rel="stylesheet">
+
+    <script type="text/javascript" src="node_modules/art-template/dist/template.js"></script>
+  	<script type="text/javascript">
+  	/*	System.config({
+  			baseURL:'/'
+  		})
+  		System.import('js/main.js')*/
+  	</script>
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar" id="tablesList">
+            <script type="text/html" id="tablesTemplate">
+              {{each tables as value i}}
+                {{if i===0}}
+                  <li class="active"><a href="#">{{value}} <span class="sr-only">(current)</span></a></li>
+                {{else}}
+                  <li><a href="#">{{value}}</a></li>
+                {{/if}}
+              {{/each}}
+            </script>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="tableDetail">
+        <script type="text/html" id="tableDetailTemplate">
+          <h1 class="page-header">{{tableName}}</h1>
+          <h1 class="page-header">Table1</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                <th>rows</th>
+                {{each columns as value i}}
+                  <th>{{value}}</th>
+                {{each}}
+                </tr>
+              </thead>
+              <tbody>
+                {{each tableDatas as tableData i}}
+                    <tr>
+                      {{each tableData as data j}}
+                        <td>{{data}}</td>
+                      {{/each}}
+                    </tr>
+                {{/each}}
+              </tbody>
+              </table>
+          </div>
+        </script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

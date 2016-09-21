@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="zzn">
+
+    <title>Coding</title>
+
+	<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="node_modules/jstree/dist/themes/default/style.min.css">
+  <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css">
+  
+  <link rel="stylesheet" type="text/css" href="css/ide_main.css">
+
+    <!-- Custom styles for this template -->
+    <script type="text/javascript" src="node_modules/systemjs/dist/system.js"></script>
+   	<script type="text/javascript" src="node_modules/traceur/bin/traceur.js"></script>
+   	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js" ></script>
+   	<script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="node_modules/art-template/dist/template.js"></script>
+
+     <script type="text/javascript" src='node_modules/jstree/dist/jstree.min.js'></script>
+    <script type="text/javascript" src='node_modules/ace-builds/src-min/ace.js'></script>
+    <script type="text/javascript" src="node_modules/ace-builds/src-min/ext-language_tools.js"></script>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://wecloudapp.com">WeCloud</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-left" id='menu'>
+            <!-- <li><a>Database</a></li> -->
+            <li><a class='active'>Code</a></li>
+              <li><a>Git</a></li>
+              <li><a>Package</a></li>
+              <li><a><i class="fa fa-play-circle"></i> Run</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <div class="container-fluid" id='content'>
+     
+    </div>
+    <script type="text/javascript">
+    System.import('js/main.js').then(function (main) {
+      $('#menu').on('click',function (e) {
+          var clickMenu = e.target;
+          if (clickMenu.innerText.indexOf('Run') > 0) {
+            main.run();
+          } else {
+            var menuMap = {
+              //Database:'database.html',
+              Code:'coding.html',
+              Git:'git.html',
+              Package:'package.html'
+            }
+            var currentPage = menuMap[clickMenu.innerText];
+            if (currentPage) {
+              window.localStorage.currentPage = currentPage;
+              initPageContent(currentPage);
+            }
+          }
+      })
+      initPageContent(window.localStorage.currentPage||'coding.html');
+      function initPageContent (pagePath) {
+        $('#content').load(pagePath);
+      }
+    });
+
+    </script>
+  </body>
+</html>

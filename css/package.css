@@ -1,0 +1,18 @@
+.termBody{
+	position: absolute;
+	top: 20;
+	left: 100;
+}
+.package-form-line{
+	margin-top: 4em;
+}
+.btn-package-go{
+	width: 150px;
+}
+.img-2d-barcode{
+	margin-top: 4em;
+}
+.terminal{
+	margin-top: 8em;
+	margin-left: 1em;
+}

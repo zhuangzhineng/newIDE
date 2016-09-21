@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>upload</title>
+        <meta http-equiv="description" content="this is my page">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    </head>
+    <script type="text/javascript">
+        function uploadFile(){
+            var appid = getQueryString("appid");
+            var accessToken = getQueryString("accessToken");
+            var path = document.getElementById("path").value;
+            var redirect = getQueryString("redirect");
+            document.form.action = "/api/uploadFile?accessToken="+accessToken+"&appid="+appid+"&path=" + path;
+            document.form.submit();
+        }
+
+        function getQueryString(name){
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if(r != null){
+            return unescape(r[2]);
+        } 
+        else{
+            return "";
+        }
+    }
+    </script>
+    <body>
+        <form method="post" action="#" name="form" enctype="multipart/form-data">
+            输入目标根目录：<input type="text" id="path" name="path"></input><br/><br/>
+            选择需要导入的文件：
+            <input type="file" name="files" multiple="multiple" /> <br/><br/>
+            <input type="submit" value="上传" onclick="uploadFile();" />
+        </form>
+    </body>
+</html>

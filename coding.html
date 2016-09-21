@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <title>Coding</title>
+
+  <link rel="stylesheet" type="text/css" href="css/coding.css">
+  <link rel="stylesheet" type="text/css" href="node_modules/jquery.terminal/css/jquery.terminal.css">
+
+  <script type="text/javascript" src="node_modules/jquery.terminal/js/jquery.terminal-min.js"></script>
+  <script type="text/javascript" src="node_modules/jquery.terminal/js/jquery.mousewheel-min.js"></script>
+  <script type="text/javascript" src="js/common.js"></script>
+  	<script type="text/javascript">
+  		System.import('js/main.js').then(function (main) {
+        $('#run').on('click',function (e) {
+          main.run();
+        });
+        main.initFileTree();
+        main.initCodeContainer();
+        main.initConsoleTerminal();
+        main.initConsoleConnect();
+
+        $("#device_select").change(function() {
+            updatePreview();
+        });
+        updatePreview();
+
+        function updatePreview() {
+          var url = 'no_preview.html';
+          var iframe = $('#simulator');
+          var device = $('#device_select').val();
+          var pk = common.getAppetizePublicKey(device);
+          console.log('updating preview. device:' + device + ' pk=' + pk);
+          if (pk) {
+            url = "https://appetize.io/embed/" + pk + "?device=" + device + "&scale=100&autoplay=true&orientation=portrait&deviceColor=black";
+          }
+          iframe.attr('src', url);
+        }
+      });
+  	</script>
+  </head>
+
+  <body>
+    
+    <div class="container-fluid" id='pageContent'>
+    <div>
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar" id="projectCodeTree">  
+        </div>
+
+        <div class="col-sm-6 col-sm-offset-3 col-md-7 col-md-offset-2 main"> 
+          <div id="contentArea" class="col-md-12"></div>
+          <div id="consoleDiv" class="col-md-12">
+          </div> 
+        </div>
+
+        <div class="col-md-2">
+          <select id='device_select'>
+            <option value="iphone5s">iPhone 5s</option>
+            <option value="iphone6">iPhone 6</option>
+            <option value="iphone6plus">iPhone 6+</option>
+            <option value="iphone6s">iPhone 6s</option>
+            <option value="iphone6splus">iPhone 6s+</option>
+            <option value="ipadair">iPad Air</option>
+            <option value="ipadair2">iPad Air 2</option>
+            <option value="nexus5">Nexus 5</option>
+            <option value="nexus7">Nexus 7</option>
+            <option value="nexus9">Nexus 9</option>
+          </select>>
+          <iframe id="simulator" width="400px" height="800px" frameborder="0" scrolling="no" class="phone"></iframe>
+        </div>
+        
+      </div>
+    </div>
+    <script type="text/html" id="tabHeaderTemplate">
+      <li role='presentation' tabId="{{id}}">
+        <a href='#{{contentId}}' id={{id}} aria-controls={{contentId}} role='tab' data-toggle='tab'>
+          <i class='fa fa-times' aria-hidden='true' name='closeIcon' target='{{id}}'></i>{{tabTitle}}</a>
+      </li>
+    </script>
+    <script type="text/html" id="tabBodyTemplate">
+      <div role='tabpanel' class='tab-pane fade' id={{contentId}} tabId="{{id}}">
+        <!-- <div id="toolbar{{id}}" name='toolbar'>
+            <a href="#" id="saveButton{{id}}" name="saveButton"><i class="fa fa-save"></i> save</a>
+        </div> -->
+        <div id="codeArea{{id}}" name='codeArea'></div>
+      </div>
+    </script>
+    <!-- Modal -->
+    <div class="modal fade" id="createJSModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">CreateFile</h4>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="createAPIModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">CreateFile</h4>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </body>
+</html>
